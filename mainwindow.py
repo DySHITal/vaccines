@@ -3,6 +3,10 @@ from PySide6.QtWidgets import QMainWindow
 from PySide6.QtCore import QFile
 from PySide6 import QtUiTools
 from pages.page_db import Page_DB
+from pages.page_add_user import Page_add_user
+from pages.page_mod_user import PageModify
+from pages.page_del_user import PageDelete
+from pages.page_vacunas import PageVacunas
 from database.sqlite import Database
 
 class MainWindow(QMainWindow):
@@ -22,4 +26,9 @@ class MainWindow(QMainWindow):
 
         self.db = Database()
 
+        # Paginas
         self.page_db = Page_DB(self.ui, self)
+        self.page_addUser = Page_add_user(self.ui, self.page_db)
+        self.page_modUser = PageModify(self.ui)
+        self.page_delUser = PageDelete(self.ui)
+        self.page_vacunas = PageVacunas(self.ui)

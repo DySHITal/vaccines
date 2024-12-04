@@ -39,5 +39,3 @@ class Database:
         # Confirmar cambios y cerrar conexión
         conn.commit()
         conn.close()
-
-        print(f"Base de datos '{db_name}' y tablas creadas exitosamente.")
