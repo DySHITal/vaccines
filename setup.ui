@@ -160,6 +160,13 @@
                 </column>
                </widget>
               </item>
+              <item>
+               <widget class="QPushButton" name="bt_refrescar_db">
+                <property name="text">
+                 <string>Refrescar</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
@@ -361,10 +368,100 @@
             </widget>
            </item>
            <item>
-            <widget class="QTableWidget" name="tableWidget_2">
+            <widget class="QTableWidget" name="tabla_vacunas">
+             <row>
+              <property name="text">
+               <string>Recién Nacido</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>2 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>3 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>4 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>5 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>6 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>12 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>15 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>15-18 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>18 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>24 Meses</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>5-6 Años</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>11 Años</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>15+  Años</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Adultos</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Embarazadas</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Puerperio</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Personal de salud</string>
+              </property>
+             </row>
              <column>
               <property name="text">
-               <string>BCG (1)</string>
+               <string>BCG</string>
               </property>
              </column>
              <column>
@@ -374,7 +471,7 @@
              </column>
              <column>
               <property name="text">
-               <string>Neumococo Conjugada 13 valente (2)</string>
+               <string>Neumococo Conjugada</string>
               </property>
              </column>
              <column>
@@ -452,6 +549,196 @@
                <string>Fiebre Hemorragica Argentina</string>
               </property>
              </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="0" column="1">
+              <property name="text">
+               <string>Dosis neonatal</string>
+              </property>
+             </item>
+             <item row="1" column="2">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="1" column="3">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="1" column="4">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="1" column="5">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="2" column="6">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="3" column="2">
+              <property name="text">
+               <string>2º dosis</string>
+              </property>
+             </item>
+             <item row="3" column="3">
+              <property name="text">
+               <string>2º dosis</string>
+              </property>
+             </item>
+             <item row="3" column="4">
+              <property name="text">
+               <string>2º dosis</string>
+              </property>
+             </item>
+             <item row="3" column="5">
+              <property name="text">
+               <string>2º dosis</string>
+              </property>
+             </item>
+             <item row="4" column="6">
+              <property name="text">
+               <string>2º dosis</string>
+              </property>
+             </item>
+             <item row="4" column="7">
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+             <item row="5" column="3">
+              <property name="text">
+               <string>3º dosis</string>
+              </property>
+             </item>
+             <item row="5" column="4">
+              <property name="text">
+               <string>3º dosis</string>
+              </property>
+             </item>
+             <item row="5" column="7">
+              <property name="text">
+               <string>dosis anual</string>
+              </property>
+             </item>
+             <item row="6" column="2">
+              <property name="text">
+               <string>refuerzo</string>
+              </property>
+             </item>
+             <item row="6" column="8">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="6" column="9">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="7" column="6">
+              <property name="text">
+               <string>refuerzo</string>
+              </property>
+             </item>
+             <item row="7" column="10">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="8" column="3">
+              <property name="text">
+               <string>1º refuerzo</string>
+              </property>
+             </item>
+             <item row="8" column="4">
+              <property name="text">
+               <string>1º refuerzo</string>
+              </property>
+             </item>
+             <item row="9" column="16">
+              <property name="text">
+               <string>1º dosis</string>
+              </property>
+             </item>
+             <item row="11" column="4">
+              <property name="text">
+               <string>2º refuerzo</string>
+              </property>
+             </item>
+             <item row="11" column="9">
+              <property name="text">
+               <string>2º dosis</string>
+              </property>
+             </item>
+             <item row="11" column="11">
+              <property name="text">
+               <string>2º refuerzo</string>
+              </property>
+             </item>
+             <item row="12" column="6">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="12" column="12">
+              <property name="text">
+               <string>refuerzo</string>
+              </property>
+             </item>
+             <item row="12" column="13">
+              <property name="text">
+               <string>2 dosis</string>
+              </property>
+             </item>
+             <item row="12" column="16">
+              <property name="text">
+               <string>refuerzo</string>
+              </property>
+             </item>
+             <item row="13" column="17">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="14" column="14">
+              <property name="text">
+               <string>Refuerzo c/10 años</string>
+              </property>
+             </item>
+             <item row="15" column="7">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="15" column="12">
+              <property name="text">
+               <string>una dosis</string>
+              </property>
+             </item>
+             <item row="16" column="7">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="17" column="7">
+              <property name="text">
+               <string>Única dosis</string>
+              </property>
+             </item>
+             <item row="17" column="12">
+              <property name="text">
+               <string>una dosis</string>
+              </property>
+             </item>
             </widget>
            </item>
            <item>
@@ -638,7 +925,7 @@
      <x>0</x>
      <y>0</y>
      <width>1095</width>
-     <height>22</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">

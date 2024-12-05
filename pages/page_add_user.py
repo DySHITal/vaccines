@@ -1,4 +1,4 @@
-from database.consultas import Comunicacion
+from database.consultas_pacientes import Comunicacion
 
 class Page_add_user:
     def __init__(self, ui, metodos_pacientes, statusBar):

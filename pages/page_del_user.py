@@ -1,4 +1,4 @@
-from database.consultas import Comunicacion
+from database.consultas_pacientes import Comunicacion
 from metodos.metodos_pacientes import MetodosPacientes
 from functools import partial
 class PageDelete:

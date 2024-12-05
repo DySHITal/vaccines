@@ -3,6 +3,14 @@ import sqlite3
 class Comunicacion():
     def __init__(self):
         self.con = sqlite3.connect('control_vacunas.db')
+
+    def get_paciente_id(self, nombre, apellido):
+        cursor = self.con.cursor()
+        query = "SELECT id FROM pacientes WHERE nombre = ? AND apellido = ?"
+        cursor.execute(query, (nombre, apellido))
+        paciente_id = cursor.fetchone()
+        cursor.close()
+        return paciente_id[0] if paciente_id else None
     
     def agregar_paciente(self, nombre, apellido, telefono, correo):
         cursor = self.con.cursor()

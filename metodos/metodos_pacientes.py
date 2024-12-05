@@ -1,6 +1,6 @@
 import sqlite3
 from PySide6 import QtWidgets
-from database.consultas import Comunicacion
+from database.consultas_pacientes import Comunicacion
 class MetodosPacientes:
     def __init__(self, ui, statusBar):
         super().__init__()
