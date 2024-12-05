@@ -1,5 +1,5 @@
 import sys
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QStatusBar
 from PySide6.QtCore import QFile
 from PySide6 import QtUiTools
 from pages.page_db import Page_DB
@@ -25,10 +25,13 @@ class MainWindow(QMainWindow):
         self.showMaximized()
 
         self.db = Database()
+        self.statusBar = QStatusBar(self)
+        self.setStatusBar(self.statusBar)
+
 
         # Paginas
-        self.page_db = Page_DB(self.ui, self)
-        self.page_addUser = Page_add_user(self.ui, self.page_db)
-        self.page_modUser = PageModify(self.ui)
-        self.page_delUser = PageDelete(self.ui)
-        self.page_vacunas = PageVacunas(self.ui)
+        self.page_db = Page_DB(self.ui, self.statusBar, self)
+        self.page_addUser = Page_add_user(self.ui, self.page_db.metodos_pacientes, self.statusBar)
+        self.page_modUser = PageModify(self.ui, self.statusBar)
+        self.page_delUser = PageDelete(self.ui, self.statusBar, self.page_db)
+        self.page_vacunas = PageVacunas(self.ui, self.statusBar)

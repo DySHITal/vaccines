@@ -62,7 +62,7 @@ class Comunicacion():
 
     def actualiza_paciente(self, Id, nombre, apellido, telefono, correo):
         cursor = self.con.cursor()
-        query = '''UPDATE pacientes SET nombre = '{}', apellido = '{}', correo = '{}', telefono = '{}' WHERE ID = '{}' '''.format(nombre, apellido, correo, telefono, Id)
+        query = '''UPDATE pacientes SET nombre = '{}', apellido = '{}', correo = '{}', telefono = '{}' WHERE ID = '{}' '''.format(nombre, apellido, telefono, correo, Id)
         cursor.execute(query)
         a = cursor.rowcount
         self.con.commit()

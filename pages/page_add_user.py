@@ -1,12 +1,12 @@
 from database.consultas import Comunicacion
-from database.consultas import Comunicacion
 
 class Page_add_user:
-    def __init__(self, ui, page_db):
+    def __init__(self, ui, metodos_pacientes, statusBar):
         super().__init__()
         self.ui = ui
         self.db = Comunicacion()
-        self.page_db = page_db
+        self.metodos_pacientes = metodos_pacientes
+        self.statusBar = statusBar
         
         # Conexiones de los botones
         self.ui.bt_volver_add.clicked.connect(self.volver)
@@ -19,12 +19,12 @@ class Page_add_user:
         correo = self.ui.line_correo_add.text().strip()
 
         if not (nombre and apellido):
-            print("El nombre y apellido son obligatorios.")
+            self.statusBar.showMessage("El nombre y apellido son obligatorios.", 5000)
             return
 
         try:
             self.db.agregar_paciente(nombre, apellido, telefono, correo)
-            print("Paciente registrado exitosamente.")
+            self.statusBar.showMessage("Paciente registrado exitosamente.", 5000)
             
             # Limpiar campos
             self.ui.line_nombre_add.clear()
@@ -32,8 +32,8 @@ class Page_add_user:
             self.ui.line_cel_add.clear()
             self.ui.line_correo_add.clear()
         except Exception as e:
-            print(f"Error al agregar el paciente: {e}")
+            self.statusBar.showMessage(f"Error al agregar el paciente: {e}", 5000)
 
     def volver(self):
-        self.page_db.metodos_pacientes.mostrarPacientes()
+        self.metodos_pacientes.mostrarPacientes(self.ui.tabla_db)
         self.ui.stackedWidget.setCurrentWidget(self.ui.page_db)
