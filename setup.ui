@@ -92,10 +92,25 @@
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="line_nombre_db"/>
+               <widget class="QLineEdit" name="line_nombre_db">
+                <property name="placeholderText">
+                 <string>Nombre</string>
+                </property>
+               </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="line_apellido_db"/>
+               <widget class="QLineEdit" name="line_apellido_db">
+                <property name="placeholderText">
+                 <string>Apellido</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="line_dni_db">
+                <property name="placeholderText">
+                 <string>DNI</string>
+                </property>
+               </widget>
               </item>
               <item>
                <widget class="QPushButton" name="bt_buscar_db">
@@ -156,6 +171,11 @@
                 <column>
                  <property name="text">
                   <string>Correo</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>DNI</string>
                  </property>
                 </column>
                </widget>
@@ -220,6 +240,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QLineEdit" name="line_dni_add">
+               <property name="placeholderText">
+                <string>DNI</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>
@@ -276,16 +303,9 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_3">
              <item>
-              <widget class="QLineEdit" name="line_nombre_del">
+              <widget class="QLineEdit" name="line_dni_del">
                <property name="placeholderText">
-                <string>Nombre</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="line_apellido_del">
-               <property name="placeholderText">
-                <string>Apellido</string>
+                <string>DNI</string>
                </property>
               </widget>
              </item>
@@ -318,6 +338,11 @@
              <column>
               <property name="text">
                <string>Correo</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>DNI</string>
               </property>
              </column>
             </widget>
@@ -789,16 +814,9 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
              <item>
-              <widget class="QLineEdit" name="line_nombre_buscar_mod">
+              <widget class="QLineEdit" name="line_dni_buscar_mod">
                <property name="placeholderText">
-                <string>Nombre</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLineEdit" name="line_apellido_buscar_mod">
-               <property name="placeholderText">
-                <string>Apellido</string>
+                <string>DNI</string>
                </property>
               </widget>
              </item>
@@ -856,6 +874,13 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>DNI</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item>
@@ -874,6 +899,9 @@
                </item>
                <item>
                 <widget class="QLineEdit" name="line_correo_mod"/>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="line_dni_mod"/>
                </item>
               </layout>
              </item>

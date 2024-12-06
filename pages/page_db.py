@@ -20,9 +20,8 @@ class Page_DB:
         self.ui.bt_del_user.clicked.connect(self.actualizar_tabla_del)
         self.ui.bt_salir_user.clicked.connect(lambda: QApplication.instance().quit())
         self.ui.bt_refrescar_db.clicked.connect(lambda: self.metodos_pacientes.mostrarPacientes(self.ui.tabla_db))
+        self.ui.bt_buscar_db.clicked.connect(partial(self.metodos_pacientes.buscar_por_nombre, self.ui.tabla_db, self.ui.line_nombre_db, self.ui.line_apellido_db, self.ui.line_dni_db))
 
-        # Conectar buscar a buscar_por_nombre
-        self.ui.bt_buscar_db.clicked.connect(partial(self.metodos_pacientes.buscar_por_nombre, self.ui.tabla_db, self.ui.line_nombre_db, self.ui.line_apellido_db))
         self.ui.tabla_db.cellDoubleClicked.connect(self.mostrar_vacunas)
 
     def actualizar_tabla_del(self):

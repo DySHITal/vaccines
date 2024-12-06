@@ -15,7 +15,8 @@ class Database:
             nombre TEXT NOT NULL,
             apellido TEXT NOT NULL,
             telefono TEXT NOT NULL,
-            correo TEXT UNIQUE NOT NULL
+            correo TEXT UNIQUE NOT NULL,
+            dni TEXT UNIQUE NOT NULL
         )
         """)
 
@@ -36,6 +37,5 @@ class Database:
         )
         """)
 
-        # Confirmar cambios y cerrar conexión
         conn.commit()
         conn.close()

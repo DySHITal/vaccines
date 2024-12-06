@@ -17,13 +17,14 @@ class Page_add_user:
         apellido = self.ui.line_apellido_add.text().strip().upper()
         telefono = self.ui.line_cel_add.text().strip()
         correo = self.ui.line_correo_add.text().strip()
+        dni = self.ui.line_dni_add.text().strip()
 
-        if not (nombre and apellido):
-            self.statusBar.showMessage("El nombre y apellido son obligatorios.", 5000)
+        if not (nombre and apellido and dni):
+            self.statusBar.showMessage("El nombre, apellido y dni son obligatorios.", 5000)
             return
 
         try:
-            self.db.agregar_paciente(nombre, apellido, telefono, correo)
+            self.db.agregar_paciente(nombre, apellido, telefono, correo, dni)
             self.statusBar.showMessage("Paciente registrado exitosamente.", 5000)
             
             # Limpiar campos
@@ -31,6 +32,7 @@ class Page_add_user:
             self.ui.line_apellido_add.clear()
             self.ui.line_cel_add.clear()
             self.ui.line_correo_add.clear()
+            self.ui.line_dni_add.clear()
         except Exception as e:
             self.statusBar.showMessage(f"Error al agregar el paciente: {e}", 5000)
 

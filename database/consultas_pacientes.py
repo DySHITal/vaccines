@@ -12,9 +12,9 @@ class Comunicacion():
         cursor.close()
         return paciente_id[0] if paciente_id else None
     
-    def agregar_paciente(self, nombre, apellido, telefono, correo):
+    def agregar_paciente(self, nombre, apellido, telefono, correo, dni):
         cursor = self.con.cursor()
-        query = '''INSERT INTO pacientes (nombre, apellido, telefono, correo) VALUES ('{}', '{}', '{}', '{}')'''.format(nombre, apellido, telefono, correo)
+        query = '''INSERT INTO pacientes (nombre, apellido, telefono, correo, dni) VALUES ('{}', '{}', '{}', '{}', '{}')'''.format(nombre, apellido, telefono, correo, dni)
         cursor.execute(query)
         self.con.commit()
         cursor.close()
@@ -27,18 +27,21 @@ class Comunicacion():
         cursor.close()
         return pacientes
     
-    def busca_paciente(self, nombre=None, apellido=None):
+    def busca_paciente(self, nombre=None, apellido=None, dni=None):
         try:
             cursor = self.con.cursor()
-            if nombre and apellido:
-                query = "SELECT * FROM pacientes WHERE nombre = ? AND apellido = ?"
-                cursor.execute(query, (nombre, apellido))
+            if nombre and apellido and dni:
+                query = "SELECT * FROM pacientes WHERE nombre = ? AND apellido = ? AND dni = ?"
+                cursor.execute(query, (nombre, apellido, dni))
             elif nombre:
                 query = "SELECT * FROM pacientes WHERE nombre = ?"
                 cursor.execute(query, (nombre,))
             elif apellido:
                 query = "SELECT * FROM pacientes WHERE apellido = ?"
                 cursor.execute(query, (apellido,))
+            elif dni:
+                query = "SELECT * FROM pacientes WHERE dni = ?"
+                cursor.execute(query, (dni,))
             else:
                 return None
 
@@ -55,31 +58,31 @@ class Comunicacion():
 
 
     
-    def elimina_paciente(self, nombre, apellido):
+    def elimina_paciente(self, dni):
         cursor = self.con.cursor()
         try:
-            query = 'DELETE FROM pacientes WHERE nombre = ? and apellido = ?'
-            cursor.execute(query, (nombre, apellido))
+            query = 'DELETE FROM pacientes WHERE dni = ?'
+            cursor.execute(query, (dni,))
             self.con.commit()
         except sqlite3.Error as e:
-            print(f"Error al eliminar el producto: {e}")
+            print(f"Error al eliminar el paciente: {e}")
             raise e
         finally:
             cursor.close()
 
 
-    def actualiza_paciente(self, Id, nombre, apellido, telefono, correo):
+    def actualiza_paciente(self, Id, nombre, apellido, telefono, correo, dni):
         cursor = self.con.cursor()
-        query = '''UPDATE pacientes SET nombre = '{}', apellido = '{}', correo = '{}', telefono = '{}' WHERE ID = '{}' '''.format(nombre, apellido, telefono, correo, Id)
+        query = '''UPDATE pacientes SET nombre = '{}', apellido = '{}', correo = '{}', telefono = '{}', dni = '{}' WHERE ID = '{}' '''.format(nombre, apellido, telefono, correo, dni, Id)
         cursor.execute(query)
         a = cursor.rowcount
         self.con.commit()
         cursor.close()
         return a
     
-    def consultar_paciente(self, nombre, apellido):
+    def consultar_paciente(self, dni):
         cursor = self.con.cursor()
-        query = f"SELECT * FROM pacientes WHERE nombre = '{nombre}' AND apellido = '{apellido}'"
+        query = f"SELECT * FROM pacientes WHERE nombre = '{dni}'"
         result = cursor.execute(query).fetchall()
         cursor.close()
         return result 
