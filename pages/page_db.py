@@ -5,7 +5,7 @@ from pages.page_vacunas import PageVacunas
 from database.consultas_pacientes import Comunicacion
 
 class Page_DB:
-    def __init__(self, ui, mainwindow, statusBar):
+    def __init__(self, mainwindow, ui, statusBar):
         super().__init__()
         self.mainwindow = mainwindow
         self.ui = ui

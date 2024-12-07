@@ -6,7 +6,6 @@ from pages.page_db import Page_DB
 from pages.page_add_user import Page_add_user
 from pages.page_mod_user import PageModify
 from pages.page_del_user import PageDelete
-from pages.page_vacunas import PageVacunas
 from database.sqlite import Database
 
 class MainWindow(QMainWindow):
@@ -30,8 +29,7 @@ class MainWindow(QMainWindow):
 
 
         # Paginas
-        self.page_db = Page_DB(self.ui, self.statusBar, self)
+        self.page_db = Page_DB(self, self.ui, self.statusBar)
         self.page_addUser = Page_add_user(self.ui, self.page_db.metodos_pacientes, self.statusBar)
         self.page_modUser = PageModify(self.ui, self.statusBar)
         self.page_delUser = PageDelete(self.ui, self.statusBar, self.page_db)
-        self.page_vacunas = PageVacunas(self.ui, self.statusBar)

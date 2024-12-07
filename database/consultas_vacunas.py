@@ -4,9 +4,9 @@ class Comms():
     def __init__(self):
         self.con = sqlite3.connect('control_vacunas.db')
     
-    def agregar_vacuna(self, nombre):
+    def agregar_vacuna(self, paciente_id, vacuna_id, fecha_aplicacion):
         cursor = self.con.cursor()
-        query = '''INSERT INTO pacientes (nombre) VALUES ('{}')'''.format(nombre)
+        query = '''INSERT INTO pacientesvacunas (paciente_id, vacuna_id, fecha_aplicacion) VALUES ('{}', '{}', '{}')'''.format(paciente_id, vacuna_id, fecha_aplicacion)
         cursor.execute(query)
         self.con.commit()
         cursor.close()
@@ -22,3 +22,10 @@ class Comms():
         cursor.close()
         return resultado
 
+    def obtener_vacuna_id(self, nombre_vacuna):
+        cursor = self.con.cursor()
+        query = "SELECT id FROM Vacunas WHERE nombre = ?"
+        cursor.execute(query, (nombre_vacuna,))
+        resultado = cursor.fetchone()
+        cursor.close()
+        return resultado[0] if resultado else None

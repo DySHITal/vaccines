@@ -2,14 +2,10 @@ import sqlite3
 
 class Database:
     def __init__(self):
-        # Conexión a la base de datos (se creará si no existe)
         db_name = "control_vacunas.db"
         conn = sqlite3.connect(db_name)
-
-        # Crear un cursor para ejecutar comandos SQL
         cursor = conn.cursor()
 
-        # Crear tablas
         cursor.execute("""CREATE TABLE IF NOT EXISTS Pacientes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nombre TEXT NOT NULL,
@@ -36,6 +32,20 @@ class Database:
             FOREIGN KEY (vacuna_id) REFERENCES Vacunas (id) ON DELETE CASCADE
         )
         """)
+
+        vacunas_iniciales = [
+            "BCG", "HEPATITIS B", "NEUMOCOCO CONJUGADA", "QUINTUPLE O PENTAVALENTE", "IPV", 
+            "ROTAVIRUS", "MENINGOCOCO ACYW", "ANTIGRIPAL", "HEPATITIS A", "TRIPLE VIRAL", 
+            "VARICELA", "TRIPLE BACTERIANA CELULAR", "TRIPLE BACTERIANA ACELULAR", 
+            "VIRUS PAPILOMA HUMANO", "DOBLE BACTERIANA", "VIRUS SINCICIAL RESPIRATORIO", 
+            "FIEBRE AMARILLA", "FIEBRE HEMORRAGICA ARGENTINA"
+        ]
+
+
+        cursor.execute("SELECT COUNT(*) FROM Vacunas")
+        if cursor.fetchone()[0] == 0:
+            cursor.executemany("INSERT INTO Vacunas (nombre) VALUES (?)", [(v,) for v in vacunas_iniciales])
+            print("Datos iniciales insertados en la tabla Vacunas.")
 
         conn.commit()
         conn.close()
