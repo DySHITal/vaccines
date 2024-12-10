@@ -45,7 +45,5 @@ class Database:
         cursor.execute("SELECT COUNT(*) FROM Vacunas")
         if cursor.fetchone()[0] == 0:
             cursor.executemany("INSERT INTO Vacunas (nombre) VALUES (?)", [(v,) for v in vacunas_iniciales])
-            print("Datos iniciales insertados en la tabla Vacunas.")
-
         conn.commit()
         conn.close()

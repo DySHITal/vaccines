@@ -491,87 +491,87 @@
              </column>
              <column>
               <property name="text">
-               <string>Hepatitis B</string>
+               <string>HEPATITIS B</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Neumococo Conjugada</string>
+               <string>NEUMOCOCO CONJUGADA</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Quintuple o Pentavalente (3)</string>
+               <string>QUINTUPLE O PENTAVALENTE</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>IPV (4)</string>
+               <string>IPV</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Rotavirus</string>
+               <string>ROTAVIRUS</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Meningococo ACYW</string>
+               <string>MENINGOCOCO ACYW</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Antigripal</string>
+               <string>ANTIGRIPAL</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Hepatitis A</string>
+               <string>HEPATITIS A</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Triple Viral (5)</string>
+               <string>TRIPLE VIRAL</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Varicela</string>
+               <string>VARICELA</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Triple Bacteriana Celular (6)</string>
+               <string>TRIPLE BACTERIANA CELULAR</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Triple Bacteriana Acelular (7)</string>
+               <string>TRIPLE BACTERIANA ACELULAR</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Virus Papiloma Humano</string>
+               <string>VIRUS PAPILOMA HUMANO</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Doble Bacteriana (8)</string>
+               <string>DOBLE BACTERIANA</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Virus Sincicial Respiratorio (9)</string>
+               <string>VIRUS SINCICIAL RESPIRATORIO</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Fiebre Amarilla (*)</string>
+               <string>FIEBLE AMARILLA</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Fiebre Hemorragica Argentina</string>
+               <string>FIEBRE HEMORRAGICA ARGENTINA</string>
               </property>
              </column>
              <item row="0" column="0">
@@ -769,9 +769,9 @@
            <item>
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
-              <widget class="QPushButton" name="bt_guardar_vacuna">
+              <widget class="QPushButton" name="bt_refrescar_vacuna">
                <property name="text">
-                <string>Guardar</string>
+                <string>refrescar</string>
                </property>
               </widget>
              </item>
