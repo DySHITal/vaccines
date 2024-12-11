@@ -19,40 +19,45 @@ class PageVacunas:
         self.paciente_id = paciente_id
         self.ui.tabla_vacunas.clearContents() 
         vacunas_aplicadas = self.comms.obtener_vacunas_aplicadas(paciente_id)
-        
+
         if vacunas_aplicadas:
             for nombre_vacuna, fecha_aplicacion, fecha_recordatorio in vacunas_aplicadas:
                 column_index = self.buscar_columna_vacuna(nombre_vacuna)
                 if column_index is not None:
                     row = self.buscar_fila_vacia(column_index)
-                    
+
                     # Celda de vacuna aplicada
                     item_aplicacion = QTableWidgetItem(fecha_aplicacion)
-                    item_aplicacion.setBackground(QBrush(QColor(0, 255, 0)))  # Verde
-                    item_aplicacion.setForeground(QBrush(QColor(0, 0, 0)))   # Texto negro
-                    self.ui.tabla_vacunas.setItem(row, column_index, item_aplicacion)
-                    
-                    # Celda de recordatorio
-                    siguiente_fila = self.buscar_fila_vacia(column_index, row + 1)
-                    item_recordatorio = QTableWidgetItem(fecha_recordatorio)
-                    self.ui.tabla_vacunas.setItem(siguiente_fila, column_index, item_recordatorio)
-
-                    fecha_recordatorio_qdate = QDate.fromString(fecha_recordatorio, 'yyyy-MM-dd')
-                    fecha_actual = QDate.currentDate()
-                    
-                    if fecha_recordatorio_qdate < fecha_actual:
-                        item_recordatorio.setBackground(QBrush(QColor(255, 0, 0)))  # Rojo (vencido)
-                    elif fecha_recordatorio_qdate == fecha_actual:
-                        item_recordatorio.setBackground(QBrush(QColor(255, 255, 0)))  # Amarillo (hoy)
-                        QMessageBox.information(
-                            self.ui, 'Recordatorio',
-                            f'Es el día para aplicar la vacuna: {nombre_vacuna}.',
-                            QMessageBox.Ok
-                        )
+                    if fecha_aplicacion == fecha_recordatorio:
+                        item_aplicacion.setBackground(QBrush(QColor(0, 255, 0)))  # Verde para esquema terminado
+                        item_aplicacion.setForeground(QBrush(QColor(0, 0, 0)))
                     else:
-                        item_recordatorio.setBackground(QBrush(QColor(255, 255, 0)))  # Amarillo
-                        item_recordatorio.setForeground(QBrush(QColor(0, 0, 0)))    # Texto negro
+                        item_aplicacion.setBackground(QBrush(QColor(0, 255, 0)))  # Verde para aplicadas
+                        item_aplicacion.setForeground(QBrush(QColor(0, 0, 0)))
+                    
+                    self.ui.tabla_vacunas.setItem(row, column_index, item_aplicacion)
 
+                    # Celda de recordatorio
+                    if fecha_aplicacion != fecha_recordatorio:
+                        siguiente_fila = self.buscar_fila_vacia(column_index, row + 1)
+                        item_recordatorio = QTableWidgetItem(fecha_recordatorio)
+                        self.ui.tabla_vacunas.setItem(siguiente_fila, column_index, item_recordatorio)
+
+                        fecha_recordatorio_qdate = QDate.fromString(fecha_recordatorio, 'yyyy-MM-dd')
+                        fecha_actual = QDate.currentDate()
+
+                        if fecha_recordatorio_qdate < fecha_actual:
+                            item_recordatorio.setBackground(QBrush(QColor(255, 0, 0)))  # Rojo (vencido)
+                        elif fecha_recordatorio_qdate == fecha_actual:
+                            item_recordatorio.setBackground(QBrush(QColor(255, 255, 0)))  # Amarillo (hoy)
+                            QMessageBox.information(
+                                self.ui, 'Recordatorio',
+                                f'Es el día para aplicar la vacuna: {nombre_vacuna}.',
+                                QMessageBox.Ok
+                            )
+                        else:
+                            item_recordatorio.setBackground(QBrush(QColor(255, 255, 0)))  # Amarillo
+                            item_recordatorio.setForeground(QBrush(QColor(0, 0, 0)))
 
     def buscar_fila_vacia(self, column_index, start_row=0):
         row_count = self.ui.tabla_vacunas.rowCount()
@@ -67,20 +72,14 @@ class PageVacunas:
             if self.ui.tabla_vacunas.horizontalHeaderItem(col).text() == nombre_vacuna:
                 return col
         return None
-    
+
     def refrescar_vacuna(self):
         self.cargar_vacunas(self.paciente_id)
-    
+
     def on_cellDoubleClicked(self, row, column): 
-        # Crear el editor de fecha
-        date_edit = QDateEdit(self.ui.tabla_vacunas)
-        date_edit.setCalendarPopup(True)
-        date_edit.setDate(QDate.currentDate())
-        self.ui.tabla_vacunas.setCellWidget(row, column, date_edit)
-        
         # Validar el contenido de la celda
         item = self.ui.tabla_vacunas.item(row, column)
-        
+
         # Si la celda ya tiene una vacuna aplicada
         if item and item.background().color() == QColor(0, 255, 0):
             QMessageBox.warning(self.ui, 'Vacuna ya colocada', 'Esta vacuna ya fue colocada, no se puede editar.', QMessageBox.OK)
@@ -111,22 +110,38 @@ class PageVacunas:
 
         # Si la celda está vacía (nueva entrada)
         if not item or not item.text():
-            # Conectar el editor de fecha para una nueva entrada
+            date_edit = QDateEdit(self.ui.tabla_vacunas)
+            date_edit.setCalendarPopup(True)
+            date_edit.setDate(QDate.currentDate())
+            self.ui.tabla_vacunas.setCellWidget(row, column, date_edit)
             date_edit.dateChanged.connect(lambda date: self.recordatorio_vacunas(row, column, date, self.paciente_id))
             return
 
     def recordatorio_vacunas(self, row, column, date, paciente_id):
         nombre_vacuna = self.ui.tabla_vacunas.horizontalHeaderItem(column).text().upper()
         vacuna_id = self.comms.obtener_vacuna_id(nombre_vacuna)
-        if vacuna_id and paciente_id:
-            fecha_aplicacion = date.toString('yyyy-MM-dd')
-            self.ui.tabla_vacunas.setItem(row, column, QTableWidgetItem(fecha_aplicacion))
-            QMessageBox.information(self.ui, 'Fecha Recordatorio', 'Por favor, selecciones una fecha recordatorio para esta vacuna.', QMessageBox.Ok)
-            if not self.ui.tabla_vacunas.item(row+1, column):
+        fecha_aplicacion = date.toString('yyyy-MM-dd')
+        respuesta = QMessageBox.question(self.ui, 'Esquema Vacunas', '¿Terminó el esquema de vacunas?', QMessageBox.Yes, QMessageBox.No)
+        if respuesta == QMessageBox.Yes:
+            item_aplicacion = QTableWidgetItem(fecha_aplicacion)
+            item_aplicacion.setBackground(QBrush(QColor(0, 255, 0)))
+            item_aplicacion.setForeground(QBrush(QColor(0, 0, 0)))
+            self.ui.tabla_vacunas.setItem(row, column, item_aplicacion)
+            
+            # Guardar la aplicación como definitiva (sin recordatorio)
+            self.comms.agregar_vacuna(paciente_id, vacuna_id, fecha_aplicacion, fecha_aplicacion)
+            QMessageBox.information(self.ui, 'Vacuna Aplicada', 'El esquema de vacunas ha finalizado.', QMessageBox.Ok)
+        elif vacuna_id and paciente_id:
+            # Manejar el caso de crear un recordatorio
+            item_aplicacion = QTableWidgetItem(fecha_aplicacion)
+            self.ui.tabla_vacunas.setItem(row, column, item_aplicacion)
+            QMessageBox.information(self.ui, 'Fecha Recordatorio', 'Por favor, seleccione una fecha recordatorio para esta vacuna.', QMessageBox.Ok)
+            
+            if not self.ui.tabla_vacunas.item(row + 1, column):
                 date_recordatorio = QDateEdit(self.ui.tabla_vacunas)
                 date_recordatorio.setCalendarPopup(True)
                 date_recordatorio.setDate(QDate.currentDate())
-                self.ui.tabla_vacunas.setCellWidget(row+1, column, date_recordatorio)
+                self.ui.tabla_vacunas.setCellWidget(row + 1, column, date_recordatorio)
                 date_recordatorio.dateChanged.connect(lambda date: self.actualizar_vacuna(row, column, fecha_aplicacion, date, paciente_id, vacuna_id))
         else:
             self.statusBar.showMessage("No se pudo agregar la vacuna. Datos incompletos.")
